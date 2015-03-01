@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  XMLTest-Swift
 //
-//  Created by Wile E on 2/28/15.
-//  Copyright (c) 2015 Example.com. All rights reserved.
+//  Created by Brian Thompson on 2/28/15.
+//  Copyright (c) 2015 by Brian Thompson. All rights reserved.
 //
 
 import UIKit
@@ -12,10 +12,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-
+	var theParty: Party?
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		// Override point for customization after application launch.
+		self.theParty = PartyParser.loadParty()
+		
+		theParty?.players.append(Player(plName: "Elmo", plLevel: 1, plClass: RPGClass.RPGClassRogue))
+		
+		if let playersInParty = theParty?.players {
+			for player in playersInParty {
+				NSLog("%@", player.stringValue())
+			}
+		}
+		
 		return true
 	}
 
@@ -38,9 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func applicationWillTerminate(application: UIApplication) {
-		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+		// In order to test this in the iOS Simulator, you will have to open info.plist and add a setting, "Application does not run in background". The default value for this setting is "NO", change the default to "YES".
+		//   Reference for this was http://stackoverflow.com/questions/7370853/forcing-a-background-application-to-terminate-in-ios-simulator
+		
+		if theParty != nil {
+			PartyParser.saveParty(theParty!)
+		}
 	}
-
-
+	
 }
 

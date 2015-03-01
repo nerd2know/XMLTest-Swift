@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  XMLTest-Swift
 //
-//  Created by Wile E on 2/28/15.
-//  Copyright (c) 2015 Example.com. All rights reserved.
+//  Created by Brian Thompson on 2/28/15.
+//  Copyright (c) 2015 by Brian Thompson. All rights reserved.
 //
 
 import UIKit
